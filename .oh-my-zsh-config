@@ -5,7 +5,9 @@
 # vim:set et sw=4 ts=4 ft=zsh:
 
 export ZSH=~/.oh-my-zsh
+export ZSH_CUSTOM=~/.oh-my-zsh-custom
 export UPDATE_ZSH_DAYS=7
+
 
 ZSH_THEME='powerlevel10k/powerlevel9k'
 plugins=(
