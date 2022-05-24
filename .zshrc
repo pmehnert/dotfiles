@@ -1,3 +1,7 @@
+#
+# ~/.zshrc
+#
+
 zstyle ':completion:*' completer _expand _complete _approximate _ignored _correct
 zstyle ':completion:*' expand suffix
 zstyle ':completion:*' format 'Complete %d'

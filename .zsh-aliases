@@ -1,3 +1,7 @@
+#
+# ~/.zsh-aliases
+#
+
 if [[ "$SESSION_TYPE" != "local" ]]; then
     alias tmux='tmux -L remote'
 else

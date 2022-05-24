@@ -1,3 +1,7 @@
+#
+# ~/.oh-my-zsh-config
+#
+#
 # vim:set et sw=4 ts=4 ft=zsh:
 
 export ZSH=~/.oh-my-zsh
@@ -12,7 +16,6 @@ plugins=(
     wd
     zsh-syntax-highlighting
     rsync
-    tmux
     systemd
 )
 

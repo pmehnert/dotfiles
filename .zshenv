@@ -1,3 +1,7 @@
+#
+# ~/.zshenv
+#
+
 export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
 fpath=("$HOME"/.local/share/zsh/site-functions $fpath)
 . "$HOME/.cargo/env"
