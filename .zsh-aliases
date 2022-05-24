@@ -1,0 +1,152 @@
+if [[ "$SESSION_TYPE" != "local" ]]; then
+    alias tmux='tmux -L remote'
+else
+    alias tmux='tmux -L local'
+fi
+
+alias sudo='sudo '
+alias dh='dirs -v'
+
+alias thinkpad-mybook-backup='sudo python /usr/lib/backups-python/backup.py --debug /etc/backup-configs/thinkpad-mybook.yaml'
+alias thinkpad-raspberry-backup-remote='sudo python /usr/lib/backups-python/backup.py --debug /etc/backup-configs/thinkpad-raspberry-home.yaml'
+alias thinkpad-raspberry-backup-local='sudo python /usr/lib/backups-python/backup.py --debug /etc/backup-configs/thinkpad-raspberry-local.yaml'
+alias desktop-mybook-backup='sudo python /usr/lib/backups-python/backup.py --debug /etc/backup-configs/desktop-mybook.yaml'
+alias desktop-raspberry-backup='sudo python /usr/lib/backups-python/backup.py --debug /etc/backup-configs/desktop-raspberry-home.yaml'
+alias media-mybook-backup='sudo python /usr/lib/backups-python/backup.py --debug /etc/backup-configs/media-mybook.yaml'
+
+# Some handy aliasses for everyday commands
+alias wttr='curl https://wttr.in/Karlsruhe'
+alias neofetch='neofetch --config ~/.neofetch-config'
+alias cpumonitor='sudo s-tui'
+alias gpumonitor='nvidia-smi -l 5'
+alias networkmonitor='nload'
+alias diskmonitor='iotop'
+alias vim2ps='/usr/bin/vim -c "hardcopy > output.ps" -c quit'
+alias top='bpytop'
+
+# Some power aliases
+alias die='shutdown now'
+alias sc-suspend='systemctl suspend'
+alias sc-hibernate='systemctl hibernate'
+
+# Some Network aliases
+alias wifiedit='kde5-nm-connection-editor'
+alias wificon='nmcli connection up'
+alias wifistat='nmcli general'
+alias wifion='nmcli radio wifi on && nmcli radio wwan on'
+alias wifioff='nmcli radio wifi off && nmcli radio wwan off'
+alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias pia='piactl'
+
+# Some ls aliasses
+# alias ls='ls -hNCF --color=auto --group-directories-first'
+alias ls='exa'
+alias colorls='colorls --group-directories-first'
+alias lc='colorls'
+alias lca='colorls --almost-all'
+alias lcl='colorls --long'
+alias lct='colorls --tree'
+alias lcd='colorls --dirs'
+alias lcf='colorls --files'
+alias lcgit='colorls --git-status'
+
+alias exa='exa -Fgh --color=auto --color-scale --level 3 --git --time-style iso --group-directories-first'
+
+# Some filesystem aliases
+alias du='du -hs'
+alias df='df -h'
+alias cdf='dfc -w -W -T -t -tmpfs'
+alias cp='cp -i'
+alias mv='mv -i'
+alias tree='tree -CF -L 5'
+alias lsblk='lsblk -o NAME,LABEL,MAJ:MIN,SIZE,RO,TYPE,FSTYPE,MOUNTPOINT'
+
+# Some random aliases
+alias ping='ping -c 5'
+alias openports='ss --all --numeric --processes --ipv4 --ipv6'
+alias ..='cd ..'
+alias q='exit'
+alias scat='sudo cat'
+alias ccat='ccat --bg="dark" '
+alias ncat='nvimpager -c'
+alias note='note.py'
+alias todo='todo.sh'
+alias t='todo'
+alias tobuy='todo.sh -d ~/.todo/tobuy.config'
+alias tb='tobuy'
+alias tailf='tail -f'
+alias wordc='wc --words'
+alias linec='wc --lines'
+alias charc='wc --chars'
+alias bytec='wc --bytes'
+
+# Edit commands
+alias edit="$VISUAL"
+alias sedit="sudo $VISUAL"
+alias e='edit'
+alias se='sedit'
+
+# alias gedit="$GRAPHICAL"
+# alias sgedit="sudo $GRAPHICAL"
+alias g='gedit'
+alias sg='sgedit'
+
+alias pdf="$PDFVIEW"
+alias pdf-present="pdfpc"
+alias less="$PAGER"
+alias page="$PAGER"
+alias filemanager="$FILEMANAGER"
+
+# Some aliases to quickly edit certain files
+alias cfzrc='edit ~/.zshrc'
+alias cfal='edit ~/.zsh-aliases'
+alias cffunc='edit ~/.zsh-functions'
+alias cfenv='edit ~/.zshenv'
+alias cfvrc='edit ~/.vimrc'
+alias cftab='sedit /etc/fstab'
+
+if [[ $0 == *"zsh"* ]]; then
+    # Some global aliases
+    alias -g H='| head'
+    alias -g T='| tail'
+    alias -g G='| grep'
+    alias -g L="| less"
+    alias -g M="| most"
+    alias -g NE="2> /dev/null"
+    alias -g NUL="> /dev/null 2>&1"
+    alias -g FZF='$(fzf)'
+    alias -g FZF_MUX='$(fzf-tmux)'
+
+    if is-at-least 4.2.0; then
+      if [[ -n "$BROWSER" ]]; then
+        _browser_fts=(htm html de org net com at cx nl se dk)
+        for ft in $_browser_fts; do alias -s $ft=$BROWSER; done
+      fi
+
+      _editor_fts=(cpp cxx cc c hh h inl asc txt TXT tex)
+      for ft in $_editor_fts; do alias -s $ft=$EDITOR; done
+
+      if [[ -n "$IMAGEVIEW" ]]; then
+        _image_fts=(jpg jpeg png gif mng tiff tif xpm)
+        for ft in $_image_fts; do alias -s $ft=$IMAGEVIEW; done
+      fi
+
+      _media_fts=(ape avi flv m4a mkv mov mp3 mpeg mpg ogg ogm rm wav webm)
+      for ft in $_media_fts; do alias -s $ft=cvlc; done
+
+      _document_fts=(pdf ps)
+      for ft in $_document_fts; do alias -s $ft=$PDFVIEW; done
+
+      #read documents
+      alias -s dvi=xdvi
+      alias -s chm=xchm
+      alias -s djvu=djview
+
+      #list whats inside packed file
+      alias -s zip="unzip -l"
+      alias -s rar="unrar l"
+      alias -s tar="tar -tf"
+      alias -s tar.gz="tar -tzf"
+      alias -s ace="unace l"
+    fi
+fi
