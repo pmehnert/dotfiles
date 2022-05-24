@@ -28,11 +28,9 @@ fi
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 
-export PAGER=/usr/bin/nvimpager
-export PDFVIEW=/usr/bin/evince
-export IMAGEVIEW=/usr/bin/eog
-export FILEMANAGER=/usr/bin/ranger
-export SPREADSHEETS=/usr/bin/sc-im
+export PAGER=nvimpager
+export PDFVIEW=evince
+export IMAGEVIEW=eog
 
 export FZF_DEFAULT_OPTS='--height 50% --multi'
 

@@ -20,7 +20,7 @@ alias media-mybook-backup='sudo python /usr/lib/backups-python/backup.py --debug
 
 # Some handy aliasses for everyday commands
 alias wttr='curl https://wttr.in/Karlsruhe'
-alias neofetch='neofetch --config ~/.neofetch-config'
+alias neofetch='neofetch --config ~/.neofetchrc'
 alias cpumonitor='sudo s-tui'
 alias gpumonitor='nvidia-smi -l 5'
 alias networkmonitor='nload'
