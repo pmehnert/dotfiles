@@ -1,0 +1,11 @@
+[user]
+	email = pascalmehnert@posteo.de
+	name = Pascal Mehnert
+	signingkey = pascalmehnert@posteo.de
+[commit]
+	gpgsign = yes
+	verbose = true
+[pull]
+	rebase = yes
+[init]
+	defaultBranch = master
