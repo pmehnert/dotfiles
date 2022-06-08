@@ -26,7 +26,7 @@ local config = {
     --   Normal = { bg = "#000000" },
     -- },
     default_theme = function(highlights) -- or a function that returns a new table of colors to set
-      local C = require "default_theme.colors"
+      local C = require("default_theme.colors")
 
       highlights.Normal = { fg = C.fg, bg = C.bg }
       return highlights
@@ -152,22 +152,27 @@ local config = {
     },
   },
 
-  mappings = {
-    n = {
-      ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" },
-      ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" },
-      ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
-      ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
+  mappings = function(maps)
+    maps.n["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" }
+    maps.n["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" }
+    maps.n["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" }
+    maps.n["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" }
 
-      ["<C-+>"] = { "<cmd>IncreaseFontSize<cr>", desc = "Increase font size" },
-      ["<C-->"] = { "<cmd>DecreaseFontSize<cr>", desc = "Decrease font size" },
-      ["<C-0>"] = { "<cmd>ResetFontSize<cr>", desc = "Restore original font size" },
-    },
-    t = {
-      -- setting a mapping to false will disable it
-      -- ["<esc>"] = false,
-    },
-  },
+    maps.n["<C-+>"] = { "<cmd>IncreaseFontSize<cr>", desc = "Increase font size" }
+    maps.n["<C-->"] = { "<cmd>DecreaseFontSize<cr>", desc = "Decrease font size" }
+    maps.n["<C-0>"] = { "<cmd>ResetFontSize<cr>", desc = "Restore original font size" }
+
+    if astronvim.is_available("toggleterm.nvim") then
+      local toggle_term_cmd = astronvim.toggle_term_cmd
+      maps.n["<leader>te"] = {
+        function()
+          toggle_term_cmd("evcxr")
+        end,
+        desc = "ToggleTerm evcxr (Rust)",
+      }
+    end
+    return maps
+  end,
 
   -- Configure plugins
   plugins = {
@@ -175,14 +180,16 @@ local config = {
       { "tpope/vim-surround" },
       { "joshdick/onedark.vim" },
       { "andweeb/presence.nvim" },
-      --
+
       ["ray-x/lsp_signature.nvim"] = {
         event = "BufRead",
-        config = function() require("lsp_signature").setup() end,
+        config = function()
+          require("lsp_signature").setup()
+        end,
       },
     },
     ["null-ls"] = function(config)
-      local null_ls = require "null-ls"
+      local null_ls = require("null-ls")
       -- Check supported formatters and linters
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
@@ -194,36 +201,35 @@ local config = {
 
       return config -- return final config table to use in require("null-ls").setup(config)
     end,
-    treesitter = { -- overrides `require("treesitter").setup(...)`
+    treesitter = {
       ensure_installed = { "lua" },
     },
-    -- use mason-lspconfig to configure LSP installations
-    ["mason-lspconfig"] = { -- overrides `require("mason-lspconfig").setup(...)`
+    ["mason-lspconfig"] = {
       ensure_installed = { "sumneko_lua" },
     },
     -- use mason-tool-installer to configure DAP/Formatters/Linter installation
     -- ["mason-tool-installer"] = { -- overrides `require("mason-tool-installer").setup(...)`
     --   ensure_installed = { "prettier", "stylua" },
     -- },
-    packer = { -- overrides `require("packer").setup(...)`
-      compile_path = vim.fn.stdpath "data" .. "/packer_compiled.lua",
+    packer = {
+      compile_path = vim.fn.stdpath("data") .. "/packer_compiled.lua",
     },
     cmp = function(local_cmp)
-      local cmp = require "cmp"
+      local cmp = require("cmp")
       local_cmp.mapping["<C-p>"] = cmp.mapping.select_prev_item()
       local_cmp.mapping["<C-n>"] = cmp.mapping.select_next_item()
       local_cmp.mapping["<C-d>"] = cmp.mapping.scroll_docs(-4)
       local_cmp.mapping["<C-f>"] = cmp.mapping.scroll_docs(4)
       local_cmp.mapping["<C-Space>"] = cmp.mapping.complete()
       local_cmp.mapping["<C-e>"] = cmp.mapping.close()
-      local_cmp.mapping["<CR>"] = cmp.mapping.confirm {
+      local_cmp.mapping["<CR>"] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
-      }
-      local_cmp.mapping["<Tab>"] = cmp.mapping.confirm {
+      })
+      local_cmp.mapping["<Tab>"] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
-      }
+      })
 
       return local_cmp
     end,
@@ -267,8 +273,9 @@ local config = {
     })
 
     -- Commands to manage the GUI font at runtime
-    RefreshGuiFont =
-      function() vim.opt.guifont = string.format("%s:h%s:l", vim.g.gui_font_face, vim.g.gui_font_size) end
+    RefreshGuiFont = function()
+      vim.opt.guifont = string.format("%s:h%s", vim.g.gui_font_face, vim.g.gui_font_size)
+    end
 
     ResizeGuiFont = function(delta)
       vim.g.gui_font_size = vim.g.gui_font_size + delta
@@ -283,9 +290,13 @@ local config = {
     -- Call function on startup to set default value
     ResetGuiFont()
 
-    vim.api.nvim_create_user_command("IncreaseFontSize", function() ResizeGuiFont(1) end, {})
-    vim.api.nvim_create_user_command("DecreaseFontSize", function() ResizeGuiFont(-1) end, {})
-    vim.api.nvim_create_user_command("ResetFontSize", function() ResetGuiFont() end, {})
+    vim.api.nvim_create_user_command("IncreaseFontSize", function()
+      ResizeGuiFont(1)
+    end, {})
+    vim.api.nvim_create_user_command("DecreaseFontSize", function()
+      ResizeGuiFont(-1)
+    end, {})
+    vim.api.nvim_create_user_command("ResetFontSize", ResetGuiFont, {})
 
     -- Set up custom filetypes
     -- vim.filetype.add {
