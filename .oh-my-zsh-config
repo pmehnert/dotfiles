@@ -18,6 +18,7 @@ plugins=(
     wd
     zsh-syntax-highlighting
     rsync
+    rust
     systemd
 )
 

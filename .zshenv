@@ -12,6 +12,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+[ -f "/home/pascal/.ghcup/env" ] && source "/home/pascal/.ghcup/env" # ghcup-env
+
 if hash ruby >/dev/null 2>&1; then
     PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
     export GEM_HOME=$HOME/.gem
