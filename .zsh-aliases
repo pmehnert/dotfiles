@@ -59,7 +59,7 @@ alias exa='exa -Fgh --color=auto --color-scale --level 3 --git --time-style iso 
 # Some filesystem aliases
 alias du='du -hs'
 alias df='df -h'
-alias cdf='dfc -w -W -T -t -tmpfs'
+alias cdf='duf'
 alias cp='cp -i'
 alias mv='mv -i'
 alias tree='tree -CF -L 5'
