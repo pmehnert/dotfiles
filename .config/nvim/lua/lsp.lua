@@ -3,6 +3,51 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local lspconfig = require('lspconfig')
 
+require('lean').setup{
+  lsp = { on_attach = on_attach },
+
+  ft = {
+    default = "lean",
+    nomodifiable = { }
+  },
+
+  abbreviations = {
+    builtin = true, -- built-in expander
+    compe = false, -- nvim-compe source
+    extra = {
+      -- wknight = '♘',
+    },
+    -- leader = '\\',
+    leader = '#',
+  },
+
+  mappings = false,
+
+  -- Infoview support
+  infoview = {
+    autoopen = true,
+
+    width = 50,
+    height = 20,
+
+    horizontal_position = "bottom",
+
+    -- Show indicators for pin locations when entering an infoview window?
+    -- always | never | auto (= only when there are multiple pins)
+    indicators = "auto",
+  },
+
+  progress_bars = {
+    enable = true,
+    priority = 10,
+  },
+
+  stderr = {
+    enable = true,
+    on_lines = nil,
+  },
+}
+
 local settings = {
     ["rust-analyzer"] = {
         assist = {
@@ -60,3 +105,4 @@ cmp.setup {
         { name = 'luasnip' },
     },
 }
+

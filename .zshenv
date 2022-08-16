@@ -8,6 +8,9 @@ fpath=("$HOME"/.local/share/zsh/site-functions $fpath)
 
 export JAVA_HOME="/usr/lib/jvm/default"
 
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"

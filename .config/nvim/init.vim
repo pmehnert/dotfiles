@@ -57,7 +57,7 @@ set signcolumn=number
 " set cot=menuone,noinsert
 " set shm+=c
 
-set guifont=JetBrainsMono\ Nerd\ Font\,\ Regular:h15
+set guifont=JetBrainsMono_Nerd_Font:h12
 
 syntax enable
 

@@ -24,4 +24,7 @@ return require('packer').startup(function()
     use { 'hrsh7th/cmp-nvim-lsp' }
     use { 'saadparwaiz1/cmp_luasnip' }
     use { 'L3MON4D3/LuaSnip' }
+
+    use { 'Julian/lean.nvim' }
+    use { 'nvim-lua/plenary.nvim' }
 end)
