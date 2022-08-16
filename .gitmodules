@@ -10,3 +10,6 @@
 [submodule ".nvim-astro/nvim"]
 	path = .nvim-astro/nvim
 	url = https://github.com/AstroNvim/AstroNvim
+[submodule ".pyenv"]
+	path = .pyenv
+	url = https://github.com/pyenv/pyenv.git
