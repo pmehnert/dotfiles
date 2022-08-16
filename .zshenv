@@ -4,7 +4,8 @@
 
 export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
 fpath=("$HOME"/.local/share/zsh/site-functions $fpath)
-. "$HOME/.cargo/env"
+
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
 export JAVA_HOME="/usr/lib/jvm/default"
 
@@ -15,7 +16,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-[ -f "/home/pascal/.ghcup/env" ] && source "/home/pascal/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 if hash ruby >/dev/null 2>&1; then
     PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
