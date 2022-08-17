@@ -7,9 +7,9 @@
 [submodule "powerlevel10k"]
 	path = .oh-my-zsh-custom/themes/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k
-[submodule ".nvim-astro/nvim"]
-	path = .nvim-astro/nvim
-	url = https://github.com/AstroNvim/AstroNvim
 [submodule ".pyenv"]
 	path = .pyenv
 	url = https://github.com/pyenv/pyenv.git
+[submodule ".config/nvim"]
+	path = .config/nvim
+	url = https://github.com/AstroNvim/AstroNvim

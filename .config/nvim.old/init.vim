@@ -17,9 +17,6 @@ if has('nvim')
     set packpath+=~/.vim/after packpath+=~/.vim
 endif
 
-"" Plugins
-" set runtimepath+=~/.vim/bundle/Vundle.vim
-
 if has('autocmd')
     filetype plugin indent on
 
@@ -57,7 +54,7 @@ set signcolumn=number
 " set cot=menuone,noinsert
 " set shm+=c
 
-set guifont=JetBrainsMono_Nerd_Font:h12
+set guifont=JetBrainsMono_Nerd_Font:h10
 
 syntax enable
 
