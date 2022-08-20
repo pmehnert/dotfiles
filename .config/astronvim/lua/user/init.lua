@@ -16,16 +16,12 @@ local config = {
     auto_quit = false,
   },
 
-  -- Set colorscheme to use
   -- colorscheme = "default_theme",
   colorscheme = "onedark",
+  -- colorscheme = "oxocarbon",
 
-  -- Override highlight groups in any theme
   highlights = {
-    -- duskfox = { -- a table of overrides/changes to the default
-    --   Normal = { bg = "#000000" },
-    -- },
-    default_theme = function(highlights) -- or a function that returns a new table of colors to set
+    default_theme = function(highlights)
       local C = require("default_theme.colors")
 
       highlights.Normal = { fg = C.fg, bg = C.bg }
@@ -44,7 +40,8 @@ local config = {
     local_vim.g.gui_font_face = "JetBrainsMono Nerd Font"
 
     local_vim.g.onedark_terminal_italics = 1
-    local_vim.g.onedark_color_overrides = { background = { gui = "#1E222A", cterm = "235", term = "0" } }
+    local_vim.g.onedark_color_overrides =
+      { background = { gui = "#1E222A", cterm = "235", term = "0" } }
 
     return local_vim
   end,
@@ -68,11 +65,10 @@ local config = {
   default_theme = {
     -- set the highlight style for diagnostic messages
     diagnostics_style = { italic = true },
+
     -- Modify the color palette for the default theme
-    colors = {
-      fg = "#abb2bf",
-      bg = "#1e222a",
-    },
+    colors = { fg = "#abb2bf", bg = "#1e222a" },
+
     -- enable or disable highlighting for extra plugins
     plugins = {
       aerial = true,
@@ -181,6 +177,11 @@ local config = {
       { "joshdick/onedark.vim" },
       { "andweeb/presence.nvim" },
 
+      -- Dependency for :RustPlay
+      { "mattn/webapi-vim" },
+
+      { "shaunsingh/oxocarbon.nvim", run = "./install.sh" },
+
       ["ray-x/lsp_signature.nvim"] = {
         event = "BufRead",
         config = function()
@@ -194,12 +195,10 @@ local config = {
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
       config.sources = {
-        -- Set a formatter
         null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.prettier,
       }
 
-      return config -- return final config table to use in require("null-ls").setup(config)
+      return config
     end,
     treesitter = {
       ensure_installed = { "lua" },
@@ -209,27 +208,20 @@ local config = {
     },
     -- use mason-tool-installer to configure DAP/Formatters/Linter installation
     -- ["mason-tool-installer"] = { -- overrides `require("mason-tool-installer").setup(...)`
-    --   ensure_installed = { "prettier", "stylua" },
+    --   ensure_installed = { "stylua" },
     -- },
     packer = {
       compile_path = vim.fn.stdpath("data") .. "/packer_compiled.lua",
     },
     cmp = function(local_cmp)
       local cmp = require("cmp")
-      local_cmp.mapping["<C-p>"] = cmp.mapping.select_prev_item()
-      local_cmp.mapping["<C-n>"] = cmp.mapping.select_next_item()
-      local_cmp.mapping["<C-d>"] = cmp.mapping.scroll_docs(-4)
-      local_cmp.mapping["<C-f>"] = cmp.mapping.scroll_docs(4)
-      local_cmp.mapping["<C-Space>"] = cmp.mapping.complete()
-      local_cmp.mapping["<C-e>"] = cmp.mapping.close()
-      local_cmp.mapping["<CR>"] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
-      })
-      local_cmp.mapping["<Tab>"] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
-      })
+      local_cmp.mapping["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" })
+      local_cmp.mapping["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" })
+      local_cmp.mapping["<CR>"] = cmp.mapping.confirm({ select = true })
+      local_cmp.mapping["<Tab>"] = cmp.mapping.confirm({ select = true })
+      local_cmp.mapping["<S-Tab>"] = cmp.mapping(function(fallback)
+        fallback()
+      end)
 
       return local_cmp
     end,
@@ -256,9 +248,20 @@ local config = {
   ["which-key"] = {
     register_mappings = {
       n = {
-        ["<leader>"] = {
-          ["b"] = { name = "Buffer" },
+        ["<leader>"] = { ["b"] = { name = "Buffer" } },
+        ["d"] = { ["s"] = { name = "Delete surroundings" } },
+        ["c"] = {
+          ["s"] = { name = "Change surroundings" },
+          ["S"] = { name = "Change surroundings [NL]" },
         },
+        ["y"] = {
+          ["s"] = { name = "Surround with", s = "Surround line" },
+          ["S"] = { name = "Surround with [NL]" },
+        },
+      },
+      v = {
+        ["S"] = { name = "Surround selection" },
+        ["g"] = { ["S"] = { name = "Surround selection (no indent)" } },
       },
     },
   },
