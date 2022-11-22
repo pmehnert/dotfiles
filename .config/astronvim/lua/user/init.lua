@@ -32,6 +32,7 @@ local config = {
   options = function(local_vim)
     local_vim.opt.relativenumber = true
     local_vim.opt.shortmess = vim.opt.shortmess + { m = true }
+    local_vim.opt.shiftwidth = 4
     local_vim.g.mapleader = " "
 
     -- Configure font face and size (specifically for Neovide)
@@ -167,6 +168,15 @@ local config = {
         desc = "ToggleTerm evcxr (Rust)",
       }
     end
+
+    if astronvim.is_available("telescope.nvim") then
+      maps.n["<leader>le"] = {
+        function()
+          require("telescope.builtin").lsp_definitions()
+        end,
+        desc = "Search definitions",
+      }
+    end
     return maps
   end,
 
@@ -219,6 +229,7 @@ local config = {
       local_cmp.mapping["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" })
       local_cmp.mapping["<CR>"] = cmp.mapping.confirm({ select = true })
       local_cmp.mapping["<Tab>"] = cmp.mapping.confirm({ select = true })
+      local_cmp.mapping["<space>"] = nil
       local_cmp.mapping["<S-Tab>"] = cmp.mapping(function(fallback)
         fallback()
       end)
