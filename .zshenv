@@ -42,12 +42,6 @@ export FZF_DEFAULT_OPTS='--height 50% --multi'
 
 export LANG=en_US.UTF-8
 
-if [ -n "$DISPLAY" ]; then
-    export BROWSER=/usr/bin/firefox
-else
-    export BROWSER=/usr/bin/links
-fi
-
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   export SESSION_TYPE='remote/ssh'
 # many other tests omitted

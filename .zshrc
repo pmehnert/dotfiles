@@ -18,9 +18,10 @@ zstyle ':completion:*' preserve-prefix '//[^/]##/'
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 zstyle ':completion:*' verbose true
 zstyle ':completion:*' rehash true
+zstyle ':completion:*:*:git:*' script /usr/share/git/completion/git-completion.zsh
 zstyle :compinstall filename '~/.zshrc'
 
-autoload -Uz compinit promptinit
+autoload -Uz compinit promptinit is-at-least
 
 HISTFILE=~/.zsh-history
 HISTSIZE=10000
@@ -34,49 +35,41 @@ DIRSTACKSIZE=8
 setopt autopushd pushdminus pushdsilent pushdtohome
 
 # Enable git completion
-zstyle ':completion:*:*:git:*' script /usr/share/git/completion/git-completion.zsh
 
 setopt PROMPT_SUBST
 
-# Source oh-my-zsh configuration from ~/.oh-my-zsh-config
-if [[ -f ~/.oh-my-zsh-config ]]; then
-    source ~/.oh-my-zsh-config
+export ZSH=~/.oh-my-zsh
+export ZSH_CUSTOM=~/.oh-my-zsh-custom
+export UPDATE_ZSH_DAYS=7
+
+plugins=(
+    extract
+    git
+    vi-mode
+    vundle
+    wd
+    zsh-syntax-highlighting
+    rsync
+    rust
+    systemd
+)
+
+# Disable powerlevel9k if in virtual console
+if [[ "$TERM" == "linux" ]]; then
+    unset ZSH_THEME
 fi
+
+# Configure zsh-syntax-highlighting
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+
 
 compinit -i
 promptinit
 
-# Enable zsh syntax highlighting
-if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
+source $ZSH/oh-my-zsh.sh
+eval "$(starship init zsh)"
 
 # Source user specific alias definitions from ~/.zsh-aliases
 if [[ -f ~/.zsh-aliases ]]; then
     source ~/.zsh-aliases
 fi
-
-# Source user specific functions from ~/.zsh-functions
-if [[ -f ~/.zsh-functions ]]; then
-    source ~/.zsh-functions
-fi
-
-# if [[ -e ~/.local/bin/run-setup-script.sh ]]; then
-#     source ~/.local/bin/run-setup-script.sh
-# fi
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/usr/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/usr/etc/profile.d/conda.sh" ]; then
-        . "/usr/etc/profile.d/conda.sh"
-    else
-        export PATH="/usr/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
