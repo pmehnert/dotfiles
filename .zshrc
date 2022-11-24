@@ -52,6 +52,7 @@ plugins=(
     rsync
     rust
     systemd
+    zsh-autosuggestions
 )
 
 # Disable powerlevel9k if in virtual console
@@ -62,6 +63,9 @@ fi
 # Configure zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
+# Configure zsh-autosuggestions
+ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+bindkey '^ ' autosuggest-accept
 
 compinit -i
 promptinit
