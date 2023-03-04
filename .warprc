@@ -1,9 +1,10 @@
 arp:~/University/arp
 borg:/hdd/mybook/borg
-cfg:~/repositories/configs
+cfg:~/.config
 crypt:/mnt/crypt
-documents:~/Documents
-downloads:~/Downloads
+dls:~/Downloads
+docs:~/Documents
+fos:~/MEGA/University/master/semester-2/fos
 hdd:/mnt/hdd
 home:~
 media:/hdd/media
@@ -11,9 +12,5 @@ mega:~/MEGA
 mybook:/hdd/mybook
 repos:~/repositories
 swaq:~/University/swaq
-foo:~/MEGA/University/master/semester-3/foo
-fos:~/MEGA/University/master/semester-2/fos
-swt:~/MEGA/University/master/semester-2/swt2
-tba:~/repositories/tba-2022
 uni:~/University
 usb:/mnt/usb

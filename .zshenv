@@ -2,12 +2,12 @@
 # ~/.zshenv
 #
 
-export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 fpath=("$HOME"/.local/share/zsh/site-functions $fpath)
 
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
-export JAVA_HOME="/usr/lib/jvm/default"
+export JAVA_HOME="/usr/lib/jvm/java"
 
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
