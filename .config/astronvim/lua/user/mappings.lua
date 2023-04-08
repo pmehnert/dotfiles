@@ -1,9 +1,6 @@
 return {
     n = {
         ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New Tab" },
-        ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick To Close" },
-        ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick To Jump" },
-        ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort By Tabs" },
         ["<C-+>"] = { "<cmd>IncreaseFontSize<cr>", desc = "Increase Font Size" },
         ["<C-->"] = { "<cmd>DecreaseFontSize<cr>", desc = "Decrease Font Size" },
         ["<C-0>"] = { "<cmd>ResetFontSize<cr>", desc = "Restore Original Font Size" },

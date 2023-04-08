@@ -9,8 +9,10 @@ return {
         skip_prompts = false,
         show_changelog = true,
     },
-    colorscheme = "onedark",
-    -- colorscheme = "oxocarbon",
+    lazy = {
+        change_detection = { enabled = false },
+    },
+    colorscheme = "tokyonight-storm",
     diagnostics = {
         virtual_text = true,
         underline = true,
@@ -22,7 +24,7 @@ return {
                 ignore_filetypes = {},
             },
         },
-        ["server-settings"] = {
+        config = {
             ["rust-analyzer"] = {
                 assist = {
                     importGranularity = "module",
@@ -30,6 +32,11 @@ return {
                 },
                 procMacro = { enable = true },
                 updates = { channel = "nightly" },
+            },
+            lua_ls = {
+                settings = {
+                    Lua = { format = { enable = false } },
+                },
             },
             texlab = {
                 chktex = { onOpenAndSave = false },
@@ -65,18 +72,5 @@ return {
             {}
         )
         vim.api.nvim_create_user_command("ResetFontSize", ResetGuiFont, {})
-
-        -- Set up custom filetypes
-        -- vim.filetype.add {
-        --   extension = {
-        --     foo = "fooscript",
-        --   },
-        --   filename = {
-        --     ["Foofile"] = "fooscript",
-        --   },
-        --   pattern = {
-        --     ["~/%.config/foo/.*"] = "fooscript",
-        --   },
-        -- }
     end,
 }
