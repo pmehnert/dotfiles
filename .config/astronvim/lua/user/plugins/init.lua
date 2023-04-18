@@ -1,6 +1,6 @@
 return {
     { "ziglang/zig.vim", ft = "zig" },
-    { "folke/tokyonight.nvim", lazy = false },
+    { "folke/tokyonight.nvim", lazy = true },
     {
         "kylechui/nvim-surround",
         event = "VeryLazy",
@@ -8,13 +8,16 @@ return {
     },
     {
         "folke/trouble.nvim",
-        requires = "nvim-tree/nvim-web-devicons",
-        cmd = "Trouble",
-        config = function() require("trouble").setup() end,
+        dependencies = "nvim-tree/nvim-web-devicons",
+        cmd = { "Trouble", "TroubleToggle" },
     },
     {
         "ray-x/lsp_signature.nvim",
         event = "BufEnter",
-        config = function() require("lsp_signature").setup() end,
+    },
+    {
+        "wintermute-cell/gitignore.nvim",
+        dependencies = "nvim-telescope/telescope.nvim",
+        cmd = "Gitignore",
     },
 }

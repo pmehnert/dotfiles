@@ -1,4 +1,5 @@
 return {
+    { "AstroNvim/astrotheme", enabled = false },
     {
         "goolord/alpha-nvim",
         opts = function(_, opts)
@@ -19,14 +20,8 @@ return {
         end,
     },
     {
-        "folke/which-key.nvim",
-        config = function(plugin, opts)
-            require("plugins.configs.which-key")(plugin, opts)
-            -- local wk = require("which-key")
-        end,
-    },
-    {
         "L3MON4D3/LuaSnip",
+        opts = { enable_autosnippets = true },
         config = function(plugin, opts)
             -- can this be safely removed?
             require("plugins.configs.luasnip")(plugin, opts)
@@ -35,5 +30,10 @@ return {
                 paths = astronvim.install.config .. "/LuaSnip",
             })
         end,
+    },
+    {
+        "mrjones2014/smart-splits.nvim",
+        build = "./kitty/install-kittens.bash",
+        opts = { at_edge = "stop" },
     },
 }

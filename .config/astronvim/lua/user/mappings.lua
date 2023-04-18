@@ -1,3 +1,10 @@
+local function luasnip_jump(amount)
+    return function()
+        local luasnip = require("luasnip")
+        if luasnip.jumpable(amount) then luasnip.jump(amount) end
+    end
+end
+
 return {
     n = {
         ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New Tab" },
@@ -39,5 +46,13 @@ return {
             "<cmd>TroubleToggle lsp_type_definitions<cr>",
             desc = "Type Definitions",
         },
+    },
+    i = {
+        ["jk"] = { luasnip_jump(1), noremap = false },
+        ["jl"] = { luasnip_jump(-1) },
+    },
+    s = {
+        ["jk"] = { luasnip_jump(1), noremap = false },
+        ["jl"] = { luasnip_jump(-1) },
     },
 }

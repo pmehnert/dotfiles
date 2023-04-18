@@ -72,5 +72,15 @@ return {
             {}
         )
         vim.api.nvim_create_user_command("ResetFontSize", ResetGuiFont, {})
+
+        -- vim.cmd([[
+        -- " Use Tab to expand and jump through snippets
+        -- imap <silent><expr> jk luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : 'jk'
+        -- smap <silent><expr> jk luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : 'jk'
+        --
+        -- " Use Shift-Tab to jump backwards through snippets
+        -- imap <silent><expr> jl luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : 'jl'
+        -- smap <silent><expr> jl luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : 'jl'
+        -- ]])
     end,
 }

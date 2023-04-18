@@ -2,7 +2,14 @@ return {
     {
         "williamboman/mason-lspconfig.nvim",
         opts = {
-            ensure_installed = { "lua_ls", "clangd", "zls", "rust_analyzer" },
+            ensure_installed = {
+                "lua_ls",
+                "clangd",
+                "zls",
+                "rust_analyzer",
+                "jdtls",
+                "pyright",
+            },
         },
     },
     {
