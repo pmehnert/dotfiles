@@ -2,6 +2,8 @@
 # ~/.zshenv
 #
 
+export PATH="$HOME/.local/share/zig-linux-x86_64-0.10.1:$PATH"
+
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 fpath=("$HOME"/.local/share/zsh/site-functions $fpath)
 

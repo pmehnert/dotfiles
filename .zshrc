@@ -18,7 +18,6 @@ zstyle ':completion:*' preserve-prefix '//[^/]##/'
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 zstyle ':completion:*' verbose true
 zstyle ':completion:*' rehash true
-zstyle ':completion:*:*:git:*' script /usr/share/git/completion/git-completion.zsh
 zstyle :compinstall filename '~/.zshrc'
 
 autoload -Uz compinit promptinit is-at-least
@@ -55,11 +54,6 @@ plugins=(
     zsh-autosuggestions
 )
 
-# Disable powerlevel9k if in virtual console
-if [[ "$TERM" == "linux" ]]; then
-    unset ZSH_THEME
-fi
-
 # Configure zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
@@ -74,6 +68,4 @@ source $ZSH/oh-my-zsh.sh
 eval "$(starship init zsh)"
 
 # Source user specific alias definitions from ~/.zsh-aliases
-if [[ -f ~/.zsh-aliases ]]; then
-    source ~/.zsh-aliases
-fi
+[[ -f ~/.zsh-aliases ]] && source ~/.zsh-aliases
