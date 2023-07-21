@@ -1,16 +1,32 @@
-local function luasnip_jump(amount)
-    return function()
-        local luasnip = require("luasnip")
-        if luasnip.jumpable(amount) then luasnip.jump(amount) end
-    end
+local function buffer_picker(callback)
+    return function() require("astronvim.utils.status").heirline.buffer_picker(callback) end
 end
 
 return {
     n = {
-        ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New Tab" },
-        ["<C-+>"] = { "<cmd>IncreaseFontSize<cr>", desc = "Increase Font Size" },
-        ["<C-->"] = { "<cmd>DecreaseFontSize<cr>", desc = "Decrease Font Size" },
-        ["<C-0>"] = { "<cmd>ResetFontSize<cr>", desc = "Restore Original Font Size" },
+        ["<leader>Q"] = { "<cmd>confirm qa<cr>", desc = "Quit All" },
+        ["<leader>b|"] = false,
+        ["<leader>b\\"] = false,
+        ["<leader>bv"] = {
+            buffer_picker(function(bufnr)
+                vim.cmd.vsplit()
+                vim.api.nvim_win_set_buf(0, bufnr)
+            end),
+            desc = "Split buffer vertical",
+        },
+        ["<leader>bh"] = {
+            buffer_picker(function(bufnr)
+                vim.cmd.split()
+                vim.api.nvim_win_set_buf(0, bufnr)
+            end),
+            desc = "Split buffer horizontal",
+        },
+        ["<leader>bt"] = {
+            buffer_picker(function(bufnr) vim.cmd.tabnew("#" .. bufnr) end),
+            desc = "Open buffer in new tab",
+        },
+        ["<C-n>"] = { function() vim.cmd.tabprevious() end, desc = "Previous tab" },
+        ["<C-m>"] = { function() vim.cmd.tabnext() end, desc = "Next tab" },
         ["<leader>te"] = {
             function() require("astronvim.utils").toggle_term_cmd("evcxr") end,
             desc = "ToggleTerm evcxr (Rust)",
@@ -46,13 +62,5 @@ return {
             "<cmd>TroubleToggle lsp_type_definitions<cr>",
             desc = "Type Definitions",
         },
-    },
-    i = {
-        ["jk"] = { luasnip_jump(1), noremap = false },
-        ["jl"] = { luasnip_jump(-1) },
-    },
-    s = {
-        ["jk"] = { luasnip_jump(1), noremap = false },
-        ["jl"] = { luasnip_jump(-1) },
     },
 }

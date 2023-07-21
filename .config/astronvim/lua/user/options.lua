@@ -12,10 +12,8 @@ return {
         autoformat_enabled = true,
         cmp_enabled = true,
         autopairs_enabled = true,
-        diagnostics_mode = 2, -- (0=off, 1=status line only, 2=virtual text off, 3=all on)
+        diagnostics_mode = 3,
         icons_enabled = true,
         ui_notifications_enabled = true,
-        gui_font_default_size = 12,
-        gui_font_face = "JetBrainsMono Nerd Font",
     },
 }

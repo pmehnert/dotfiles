@@ -13,10 +13,6 @@ return {
         change_detection = { enabled = false },
     },
     colorscheme = "tokyonight-storm",
-    diagnostics = {
-        virtual_text = true,
-        underline = true,
-    },
     lsp = {
         formatting = {
             format_on_save = {
@@ -32,55 +28,33 @@ return {
                 },
                 procMacro = { enable = true },
                 updates = { channel = "nightly" },
+                cargo = {
+                    extraArgs = "-Ctarget-cpu=native",
+                },
             },
             lua_ls = {
                 settings = {
                     Lua = { format = { enable = false } },
                 },
             },
+            clangd = {
+                capabilities = { offsetEncoding = "utf-8" },
+            },
             texlab = {
-                chktex = { onOpenAndSave = false },
+                settings = {
+                    texlab = {
+                        formatterLineLength = 0,
+                        latexindent = { modifyLineBreaks = true },
+                        build = { onSave = true },
+                    },
+                },
             },
         },
     },
     polish = function()
-        -- Commands to manage the GUI font at runtime
-        local RefreshGuiFont = function()
-            vim.opt.guifont =
-                string.format("%s:h%s", vim.g.gui_font_face, vim.g.gui_font_size)
-        end
-        local ResizeGuiFont = function(delta)
-            vim.g.gui_font_size = vim.g.gui_font_size + delta
-            RefreshGuiFont()
-        end
-        local ResetGuiFont = function()
-            vim.g.gui_font_size = vim.g.gui_font_default_size
-            RefreshGuiFont()
-        end
-
-        -- Call function on startup to set default value
-        ResetGuiFont()
-
-        vim.api.nvim_create_user_command(
-            "IncreaseFontSize",
-            function() ResizeGuiFont(1) end,
-            {}
-        )
-        vim.api.nvim_create_user_command(
-            "DecreaseFontSize",
-            function() ResizeGuiFont(-1) end,
-            {}
-        )
-        vim.api.nvim_create_user_command("ResetFontSize", ResetGuiFont, {})
-
-        -- vim.cmd([[
-        -- " Use Tab to expand and jump through snippets
-        -- imap <silent><expr> jk luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : 'jk'
-        -- smap <silent><expr> jk luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : 'jk'
-        --
-        -- " Use Shift-Tab to jump backwards through snippets
-        -- imap <silent><expr> jl luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : 'jl'
-        -- smap <silent><expr> jl luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : 'jl'
-        -- ]])
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = "gitcommit",
+            callback = function() vim.opt_local.spell = true end,
+        })
     end,
 }

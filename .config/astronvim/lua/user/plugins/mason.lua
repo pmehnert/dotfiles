@@ -17,7 +17,7 @@ return {
         opts = {
             automatic_installation = false,
             automatic_setup = true,
-            ensure_installed = { "stylua", "rustfmt" },
+            ensure_installed = { "stylua" },
         },
     },
     {

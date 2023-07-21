@@ -8,12 +8,8 @@ return {
         lazy = false,
         opts = {
             views = {
-                cmdline_popup = {
-                    position = { row = 8 },
-                },
-                popupmenu = {
-                    position = { row = 11 },
-                },
+                cmdline_popup = { position = { row = 8 } },
+                popupmenu = { position = { row = 11 } },
             },
             lsp = {
                 hover = { enabled = false },
@@ -26,6 +22,7 @@ return {
             },
             presets = {
                 command_palette = true,
+                long_message_to_split = true,
             },
             routes = {
                 {
