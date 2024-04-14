@@ -1,16 +1,13 @@
-astro:~/.config/astronvim
-borg:/hdd/mybook/borg
 cfg:~/.config
 crypt:/mnt/crypt
 dls:~/Downloads
 docs:~/Documents
-fos:~/MEGA/University/master/semester-2/fos
 hdd:/mnt/hdd
 home:~
 media:/hdd/media
 mega:~/MEGA
 mybook:/hdd/mybook
 repos:~/repositories
-swaq:~/University/swaq
+resume:~/Documents/resume/developer_cv
 uni:~/University
 usb:/mnt/usb
