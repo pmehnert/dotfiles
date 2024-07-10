@@ -1,10 +1,31 @@
 ---@type LazySpec
 return {
+    "folke/zen-mode.nvim",
+
     "Shatur/neovim-ayu",
     { "folke/tokyonight.nvim", enabled = false },
     { "AstroNvim/astrotheme", enabled = false },
 
     "andweeb/presence.nvim",
+    {
+        "nvim-telescope/telescope.nvim",
+        opts = function(_, opts)
+            return require("astrocore").extend_tbl(opts, {
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<C-x>"] = require("trouble.sources.telescope").open,
+                            ["<C-X>"] = require("trouble.sources.telescope").add,
+                        },
+                        n = {
+                            ["<C-x>"] = require("trouble.sources.telescope").open,
+                            ["<C-X>"] = require("trouble.sources.telescope").add,
+                        },
+                    },
+                },
+            })
+        end,
+    },
     {
         "ray-x/lsp_signature.nvim",
         event = "BufRead",
@@ -43,7 +64,44 @@ return {
     {
         "folke/trouble.nvim",
         dependencies = "nvim-tree/nvim-web-devicons",
-        cmd = { "Trouble", "TroubleToggle" },
+        opts = {},
+        cmd = "Trouble",
+        keys = {
+            {
+                "<leader>xx",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Toggle Diagnostics",
+            },
+            {
+                "<leader>xb",
+                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "Toggle Buffer Diagnostics",
+            },
+            {
+                "<leader>xs",
+                "<cmd>Trouble symbols toggle focus=false<cr>",
+                desc = "Toggle Symbols",
+            },
+            {
+                "<leader>xl",
+                "<cmd>Trouble lsp toggle focus=false<cr>",
+                desc = "Toggle LSP Definitions",
+            },
+            {
+                "<leader>xq",
+                "<cmd>Trouble qflist toggle<cr>",
+                desc = "Toggle Quickfix List",
+            },
+        },
+    },
+    {
+        "folke/todo-comments.nvim",
+        -- opts = {
+        --     highlight = {
+        --         pattern = [[.*<(KEYWORDS)\s*]],
+        --     },
+        --     pattern = [[\b(KEYWORDS)\b]],
+        -- },
     },
 
     {

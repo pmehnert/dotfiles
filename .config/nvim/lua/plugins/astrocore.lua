@@ -90,33 +90,8 @@ return {
                     desc = "Open buffer in new tab",
                 },
 
-                -- Bindings for 'Trouble.nvim'
+                -- Category for 'Trouble.nvim' bindings
                 ["<Leader>x"] = { name = "Trouble" },
-                ["<Leader>xx"] = {
-                    "<cmd>TroubleToggle<cr>",
-                    desc = "Toggle Diagnostics",
-                    noremap = true,
-                },
-                ["<Leader>xw"] = {
-                    "<cmd>TroubleToggle workspace_diagnostics<cr>",
-                    desc = "Workspace Diagnostics",
-                },
-                ["<Leader>xd"] = {
-                    "<cmd>TroubleToggle document_diagnostics<cr>",
-                    desc = "Document Diagnostics",
-                },
-                ["<Leader>xq"] = {
-                    "<cmd>TroubleToggle quickfix<cr>",
-                    desc = "Toggle Quickfix",
-                },
-                ["<Leader>xr"] = {
-                    "<cmd>TroubleToggle lsp_references<cr>",
-                    desc = "LSP References",
-                },
-                ["<Leader>xt"] = {
-                    "<cmd>TroubleToggle lsp_type_definitions<cr>",
-                    desc = "Type Definitions",
-                },
             },
         },
     },
