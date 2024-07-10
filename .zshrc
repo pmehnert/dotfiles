@@ -2,7 +2,7 @@
 # ~/.zshrc
 #
 
-zstyle ':completion:*' completer _expand _complete _approximate _ignored _correct
+zstyle ':completion:*' completer _expand _expand_alias _complete _ignored _correct _approximate 
 zstyle ':completion:*' expand suffix
 zstyle ':completion:*' format 'Complete %d'
 zstyle ':completion:*' group-name ''
@@ -46,7 +46,6 @@ plugins=(
     git
     vi-mode
     vundle
-    wd
     zsh-syntax-highlighting
     rsync
     rust
@@ -66,6 +65,8 @@ promptinit
 
 source $ZSH/oh-my-zsh.sh
 eval "$(starship init zsh)"
+
+eval "$(zoxide init zsh --cmd j --hook pwd)"
 
 # Source user specific alias definitions from ~/.zsh-aliases
 [[ -f ~/.zsh-aliases ]] && source ~/.zsh-aliases
